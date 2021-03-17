@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.founder.bdyx.webservice.core.mapper.WebsvrLogMapper" >
+<insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="log_id" parameterType="com.founder.bdyx.webservice.core.domain.WebsvrLog">
+    insert into f_websvr_log(
+        happen_date,
+		request_xml,
+		request_method,
+		resonse_date,
+		response_xml,
+		els_time,
+		client_ip,
+		server_ip,
+		execute_flag,
+		execute_message)
+    values(
+        #{happen_date},
+		#{request_xml},
+		#{request_method},
+		#{resonse_date},
+		#{response_xml},
+		#{els_time},
+		#{client_ip},
+		#{server_ip},
+		#{execute_flag},
+		#{execute_message})
+</insert>
+
+<select id="selectLogByDate" parameterType="com.founder.bdyx.task.domain.QueryLogMode" resultType="java.util.Map">
+    exec pro_query_log #{queryDate},#{deleteFlag} 
+</select>
+
+
+<select id="queryWbLogByDate" parameterType="com.founder.bdyx.task.domain.QueryLogMode" resultType="com.founder.bdyx.webservice.core.domain.WebsvrLog">
+    exec pro_query_log #{queryDate},#{deleteFlag} 
+</select>
+
+
+
+</mapper>

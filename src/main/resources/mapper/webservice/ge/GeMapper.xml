@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.founder.bdyx.webservice.ge.server.mapper.GeMapper" >
+
+    <select id="requestBarcode" parameterType="java.lang.String" resultType="java.util.Map">
+        select 'wangbin' as name,'famale' as sex,17 as age
+    </select>
+
+    <select id="getOrderSn" resultType="java.lang.Integer">
+        {call get_zy_order_sn_new() }
+    </select>
+
+    <insert id="insertOpOrder" parameterType="com.founder.bdyx.webservice.core.data.YzActOrder">
+        insert into yz_act_order
+          (act_order_no, patient_id, admiss_times, order_code, Serial, order_name,
+          order_time, enter_time, start_time, end_time, order_doctor, stop_doctor,
+          enter_oper, stop_opera, stop_confirm_opera, frequ_code, order_type, status_flag,
+          supply_code, drug_specification, doseage, doseage_unit, charge_amount,
+          drug_occ, mini_unit, print_order, exclusive_type, pay_self, group_no,
+          infant_flag, emergency_flag, ope_flag, discription, alter_print_order,
+          exec_unit, long_once_flag, fit_flag, preventive_flag, therapeutic_flag,
+          ward_sn, dept_sn, yz_comment, yb_limit_flag)
+        values(
+            #{actOrderNo},#{patientId},#{admissTimes},#{orderCode},#{serial},#{orderName},
+            #{orderTime},#{enterTime},#{startTime},#{endTime},#{orderDoctor},#{stopDoctor},
+            #{enterOper},#{stopOpera},#{stopConfirmOpera},#{frequCode},#{orderType},#{statusFlag},
+            #{supplyCode},#{drugSpecification},#{doseage},#{doseageUnit},#{chargeAmount},
+            #{drugOcc},#{miniUnit},#{printOrder},#{exclusiveType},#{paySelf},#{groupNo},
+            #{infantFlag},#{emergencyFlag},#{opeFlag},#{discription},#{alterPrintOrder},
+            #{execUnit},#{longOnceFlag},#{fitFlag},#{preventiveFlag},#{therapeuticFlag},
+            #{wardSn},#{deptSn},'GE',#{ybLimitFlag})
+    </insert>
+
+    <insert id="insertOpCharge" parameterType="com.founder.bdyx.webservice.core.data.ZyDetailCharge">
+        insert into zy_detail_charge
+              (patient_id, admiss_times, ledger_sn, occ_time, confirm_time, happen_date,
+              charge_code, bill_item_code, audit_code, orig_price, charge_price, charge_amount,
+              charge_group, apply_opera, confirm_opera, charge_status, infant_flag, self_flag,
+              separate_flag, suprice_flag, drug_flag, emergency_flag,
+              ope_flag, apply_status, serial, ward_sn, dept_sn, order_no,
+              exec_unit, group_no, orig_dept, orig_ward, doctor_code, comment)
+        values(
+            #{patientId},#{admissTimes},#{ledgerSn},#{occTime},#{confirmTime},#{happenDate},
+            #{chargeCode},#{billItemCode},#{auditCode},#{origPrice},#{chargePrice},#{chargeAmount},
+            #{chargeGroup},#{applyOpera},#{confirmOpera},#{chargeStatus},#{infantFlag},#{selfFlag},
+            #{separateFlag},#{supriceFlag},#{drugFlag},#{emergencyFlag},
+            #{opeFlag},#{applyStatus},#{serial},#{wardSn},#{deptSn},#{orderNo},
+            #{execUnit},#{groupNo},#{origDept},#{origWard},#{doctorCode},'GE')
+    </insert>
+
+    <select id="execOpGzCk" parameterType="java.util.Map" resultType="java.util.Map">
+        {call V_Op_Gz_Ck(#{pid},#{times},#{bar_code},#{date},#{opera},#{exec_unit}) }
+    </select>
+</mapper>

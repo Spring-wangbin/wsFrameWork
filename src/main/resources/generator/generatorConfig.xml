@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--本地数据库驱动jar -->
+    <classPathEntry
+            location="C:\Users\yang.xuefeng\.m2\repository\com\microsoft\sqlserver\sqljdbc4\4.0\sqljdbc4-4.0.jar" />
+    <!--<properties resource="application.properties"/>-->
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.founder.bdyx.core.mapper.MyMapper"/>
+        </plugin>
+
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://localhost:1433;DatabaseName=test"
+                        userId="sa"
+                        password="sa#founder123">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.founder.bdyx.modules.file.model" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper/file" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.founder.bdyx.modules.file.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="f_sys_file">
+            <!--mysql 配置-->
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <!--oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+        </table>
+
+    </context>
+</generatorConfiguration>

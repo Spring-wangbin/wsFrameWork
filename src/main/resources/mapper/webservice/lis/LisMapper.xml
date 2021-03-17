@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.founder.bdyx.webservice.lis.server.mapper.LisMapper" >
+
+    <select id="getPatsInHospital" parameterType="java.lang.String" resultType="java.util.Map">
+        select 'wangbin' as name,'famale' as sex,17 as age
+    </select>
+
+    <select id="requestOutp" resultType="java.util.Map">
+        exec RM_request_mz #{pat_cardno},#{startdate},#{enddate},#{execdept}
+    </select>
+
+    <select id="requestInp" parameterType="java.lang.String" resultType="java.util.Map">
+        select 'wangbin' as name,'famale' as sex,17 as age
+    </select>
+
+    <select id="requestRe" parameterType="java.lang.String" resultType="java.util.Map">
+        select 'wangbin' as name,'famale' as sex,17 as age
+    </select>
+
+    <select id="requestBarcode" parameterType="java.lang.String" resultType="java.util.Map">
+        select 'wangbin' as name,'famale' as sex,17 as age
+    </select>
+
+</mapper>
